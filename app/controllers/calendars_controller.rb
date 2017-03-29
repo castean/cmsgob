@@ -78,6 +78,48 @@ class CalendarsController < ApplicationController
       params.require(:calendar).permit(:calendario, :fecha_corte, :status_id)
     end
 
+    def calculameses(ca, c)
+      difmes = ca.year - c.year
+      case difmes
+      when 0
+        meses = ca.month - c.month
+        return meses
+      when 1
+        mesesa = 12 - ca.month
+        meses = mesesa + (ca.month - c.month)
+        return meses
+      else
+        meses = ( ((calendario_id.fecha_corte).year - c.fecha_inicio.year) * 12) + ((calendario_id.fecha_corte).month - c.fecha_inicio.month)
+        return meses
+      end
+    end
+
+
+    def revisacobro(meses, periodo)
+      if meses != periodo
+        restante = (meses/periodo)
+        if restante == 0
+          aplicable = false
+          return aplicable
+        else
+          while (restante != 0 && restante == periodo)
+              restante = restante/periodo
+          end
+          case restante
+            when restante == periodo
+              plicable = true
+            when 1
+              plicable = true
+            else
+              aplicable = false
+          end
+        end
+      else
+        return aplicable = true
+      end
+
+    end
+
     def crear_pagos(calendario)
       calendario_id = Calendar.find_by_status_id(8)
       cliente = Client.where(status_id: 1)
@@ -104,26 +146,41 @@ class CalendarsController < ApplicationController
               pay.save
             end
           when 2
-            
-            meses = ( ((calendario_id.fecha_corte + 5.days).year - c.fecha_inicio.year) * 12) + ((calendario_id.fecha_corte + 5.days).month - c.fecha_inicio.month)
-            aplica = meses%2
-            pay = Payment.new(:calendar_id => calendario_id.id, :client_id => c.id, :fecha_corte => calendario_id.fecha_corte, :fecha_limite => calendario_id.fecha_corte + 5.days, :saldo => (c.product.costo * 2))
-            pay.save
+            #meses = ( ((calendario_id.fecha_corte).year - c.fecha_inicio.year) * 12) + ((calendario_id.fecha_corte).month - c.fecha_inicio.month)
+            #aplica = meses%2
+            meses = calculameses(calendario_id.fecha_corte, c.fecha_inicio)
+            aplica = revisacobro(meses,2)
+            if aplica == true
+              pay = Payment.new(:calendar_id => calendario_id.id, :client_id => c.id, :fecha_corte => calendario_id.fecha_corte, :fecha_limite => calendario_id.fecha_corte + 5.days, :saldo => (c.product.costo * 2))
+              pay.save
+            end
           when 3
-            meses = ( ((calendario_id.fecha_corte + 5.days).year - c.fecha_inicio.year) * 12) + ((calendario_id.fecha_corte + 5.days).month - c.fecha_inicio.month)
-            aplica = meses%3
-            pay = Payment.new(:calendar_id => calendario_id.id, :client_id => c.id, :fecha_corte => calendario_id.fecha_corte, :fecha_limite => calendario_id.fecha_corte + 5.days, :saldo => (c.product.costo * 3))
-            pay.save
+            #meses = ( ((calendario_id.fecha_corte).year - c.fecha_inicio.year) * 12) + ((calendario_id.fecha_corte).month - c.fecha_inicio.month)
+            #aplica = meses%3
+            meses = calculameses(calendario_id.fecha_corte, c.fecha_inicio)
+            aplica = revisacobro(meses,3)
+            if aplica == true
+              pay = Payment.new(:calendar_id => calendario_id.id, :client_id => c.id, :fecha_corte => calendario_id.fecha_corte, :fecha_limite => calendario_id.fecha_corte + 5.days, :saldo => (c.product.costo * 3))
+              pay.save
+            end
           when 4
-            meses = ( ((calendario_id.fecha_corte + 5.days).year - c.fecha_inicio.year) * 12) + ((calendario_id.fecha_corte + 5.days).month - c.fecha_inicio.month)
-            aplica = meses%6
-            pay = Payment.new(:calendar_id => calendario_id.id, :client_id => c.id, :fecha_corte => calendario_id.fecha_corte, :fecha_limite => calendario_id.fecha_corte + 5.days, :saldo => (c.product.costo * 6))
-            pay.save
+            #meses = ( ((calendario_id.fecha_corte).year - c.fecha_inicio.year) * 12) + ((calendario_id.fecha_corte).month - c.fecha_inicio.month)
+            #aplica = meses%6
+            meses = calculameses(calendario_id.fecha_corte, c.fecha_inicio)
+            aplica = revisacobro(meses,6)
+            if aplica == true
+              pay = Payment.new(:calendar_id => calendario_id.id, :client_id => c.id, :fecha_corte => calendario_id.fecha_corte, :fecha_limite => calendario_id.fecha_corte + 5.days, :saldo => (c.product.costo * 6))
+              pay.save
+            end
           when 5
-            meses = ( ((calendario_id.fecha_corte + 5.days).year - c.fecha_inicio.year) * 12) + ((calendario_id.fecha_corte + 5.days).month - c.fecha_inicio.month)
-            aplica = meses%12
-            pay = Payment.new(:calendar_id => calendario_id.id, :client_id => c.id, :fecha_corte => calendario_id.fecha_corte, :fecha_limite => calendario_id.fecha_corte + 5.days, :saldo => (c.product.costo * 12))
-            pay.save
+            #meses = ( ((calendario_id.fecha_corte).year - c.fecha_inicio.year) * 12) + ((calendario_id.fecha_corte).month - c.fecha_inicio.month)
+            #aplica = meses%12
+            meses = calculameses(calendario_id.fecha_corte, c.fecha_inicio)
+            aplica = revisacobro(meses,12)
+            if aplica == true
+              pay = Payment.new(:calendar_id => calendario_id.id, :client_id => c.id, :fecha_corte => calendario_id.fecha_corte, :fecha_limite => calendario_id.fecha_corte + 5.days, :saldo => (c.product.costo * 12))
+              pay.save
+            end
         end
       end
     end
