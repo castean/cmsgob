@@ -8,6 +8,8 @@ source 'https://rubygems.org'
   gem 'authlogic', '3.4.6'
   # Info en
   gem 'bootstrap_form', '2.6.0'
+  # Info en https://github.com/CanCanCommunity/cancancan
+  gem 'cancancan'
   # ---------------------------------
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
