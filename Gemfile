@@ -9,14 +9,18 @@ source 'https://rubygems.org'
   # Info en
   gem 'bootstrap_form', '2.6.0'
   # Info en https://github.com/CanCanCommunity/cancancan
-  gem 'cancancan'
+  gem 'cancancan', '1.16.0'
+  # Info en https://github.com/kaminari/kaminari
+  gem 'kaminari', '1.0.1'
+  # Info en https://github.com/activerecord-hackery/ransack
+  gem 'ransack', '1.8.2'
   # ---------------------------------
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
-gem 'pg'
+gem 'pg', '0.18.4'
 # Use SCSS for stylesheets
 gem 'sass-rails', '5.0.6'
 # Use Uglifier as compressor for JavaScript assets
