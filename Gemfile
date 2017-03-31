@@ -4,7 +4,7 @@ source 'https://rubygems.org'
   gem 'bootstrap-sass', '3.3.7'
   # Info en https://launchschool.com/blog/integrating-rails-and-bootstrap-part-1
   gem 'autoprefixer-rails', '6.5.3'
-  # Info en https://www.sitepoint.com/rails-authentication-with-authlogic/
+  # Info en https://www.sitepoint.com/rails-authentication-with-authlogic/  https://github.com/ayb/authlogic
   gem 'authlogic', '3.4.6'
   # Info en
   gem 'bootstrap_form', '2.6.0'
