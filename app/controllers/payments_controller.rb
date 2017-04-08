@@ -1,5 +1,5 @@
 class PaymentsController < ApplicationController
-  load_and_authorize_resource
+  #load_and_authorize_resource
   before_action :set_payment, only: [:show, :edit, :update, :destroy]
 
   # GET /payments

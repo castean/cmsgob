@@ -10,10 +10,14 @@ source 'https://rubygems.org'
   gem 'bootstrap_form', '2.6.0'
   # Info en https://github.com/CanCanCommunity/cancancan
   gem 'cancancan', '1.16.0'
-  # Info en https://github.com/kaminari/kaminari
-  gem 'kaminari', '1.0.1'
+  # Info en https://github.com/mislav/will_paginate
+  gem 'will_paginate', '3.0.4'
   # Info en https://github.com/activerecord-hackery/ransack
   gem 'ransack', '1.8.2'
+  # Info en https://github.com/randym/axlsx https://github.com/straydogstudio/axlsx_rails
+  gem 'axlsx', '2.0.1'
+  gem 'axlsx_rails', '0.5.1'
+
   # ---------------------------------
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

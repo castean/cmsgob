@@ -1,11 +1,26 @@
 class ClientsController < ApplicationController
-  load_and_authorize_resource
+  #load_and_authorize_resource
+  #respond_to :html, :xml, :json, :pdf, :xlsx, :csv
   before_action :set_client, only: [:show, :edit, :update, :destroy]
 
   # GET /clients
   # GET /clients.json
   def index
-    @clients = Client.all.order(:id)
+    if params[:q]
+      @q = Client.ransack(params[:q])
+      @clients = @q.result.paginate(:page => params[:page], :per_page => 50).order(:id)
+    else
+      @q = Client.ransack(params[:q])
+      @clients = Client.all.paginate(:page => params[:page], :per_page => 50).order(:id)
+    end
+
+    respond_to do |format|
+      format.html
+      format.json
+      format.pdf { render_oficiosp_list(@clients) }
+      format.csv { send_data @clients.to_csv }
+      format.xlsx
+    end
   end
 
   # GET /clients/1
@@ -31,9 +46,11 @@ class ClientsController < ApplicationController
       if @client.save
         format.html { redirect_to @client, notice: 'Cliente creado con excito.' }
         format.json { render :show, status: :created, location: @client }
+        format.xlsx
       else
         format.html { render :new }
         format.json { render json: @client.errors, status: :unprocessable_entity }
+        format.xlsx
       end
     end
   end

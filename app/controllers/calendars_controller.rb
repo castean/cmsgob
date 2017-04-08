@@ -1,5 +1,5 @@
 class CalendarsController < ApplicationController
-  load_and_authorize_resource
+  #load_and_authorize_resource
   before_action :set_calendar, only: [:show, :edit, :update, :destroy]
 
   # GET /calendars
@@ -108,9 +108,9 @@ class CalendarsController < ApplicationController
           end
           case restante
             when restante == periodo
-              plicable = true
+              aplicable = true
             when 1
-              plicable = true
+              aplicable = true
             else
               aplicable = false
           end

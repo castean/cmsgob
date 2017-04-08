@@ -1,5 +1,5 @@
 class IpAddressesController < ApplicationController
-  load_and_authorize_resource
+  #load_and_authorize_resource
   before_action :set_ip_address, only: [:show, :edit, :update, :destroy]
 
   # GET /ip_addresses
