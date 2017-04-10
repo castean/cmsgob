@@ -4,4 +4,5 @@ class User < ActiveRecord::Base
   end
 
   ROLES = %w[admin general pagos]
+
 end
