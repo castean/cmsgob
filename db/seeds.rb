@@ -7,6 +7,9 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # ruby encoding: utf-8
+
+User.create(email: "test@gamil.com", crypted_password: "admin", passowrd_salt: "admin", fullname: "administrador", username: "admin", role: "admin", login: "admin")
+
 status_list = [
   [ "clientes", "ACTIVO" ],
   [ "clientes", "SUSPENDIDO" ],

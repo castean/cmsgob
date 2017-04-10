@@ -18,6 +18,7 @@ source 'https://rubygems.org'
   gem 'axlsx', '2.0.1'
   gem 'axlsx_rails', '0.5.1'
 
+  gem 'rails_12factor'
   # ---------------------------------
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
