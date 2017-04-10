@@ -5,7 +5,21 @@ class PaymentsController < ApplicationController
   # GET /payments
   # GET /payments.json
   def index
-    @payments = Payment.all
+    if params[:q]
+      @q = Payment.ransack(params[:q])
+      @payments = @q.result.paginate(:page => params[:page], :per_page => 50).order(:id)
+    else
+      @q = Payment.ransack(params[:q])
+      @payments = Payment.all.paginate(:page => params[:page], :per_page => 50).order(:id)
+    end
+
+    respond_to do |format|
+      format.html
+      format.json
+      format.pdf { render_oficiosp_list(@payments) }
+      format.csv { send_data @payments.to_csv }
+      format.xlsx
+    end
   end
 
   # GET /payments/1

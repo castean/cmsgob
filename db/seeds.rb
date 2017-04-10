@@ -18,9 +18,23 @@ status_list = [
   [ "calendario", "ACTIVO" ],
   [ "calendario", "CERRADO" ],
   [ "pagos", "EN TIEMPO" ],
-  [ "pagos", "ATRASADO" ]
+  [ "pagos", "ATRASADO" ],
+  [ "pagos", "PAGADO" ]
 ]
 
 status_list.each do |tabla, status|
   Status.create( tabla: tabla, status: status )
+end
+
+
+status_list2 = [
+  [ "MENSUAL"],
+  [ "BIMESTRAL"],
+  [ "TRIMESTRAL"],
+  [ "SEMESTRAL"],
+  [ "ANUAL"]
+]
+
+status_list2.each do |periodo|
+  PaymentType.create( periodo: periodo )
 end

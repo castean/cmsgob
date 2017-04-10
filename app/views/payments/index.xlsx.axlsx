@@ -1,0 +1,6 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Pagos") do |sheet|
+  @payments.each do |p|
+	sheet.add_row [p.calendar.calendario, p.client.fullname, p.fecha_limite, p.fecha_corte, p.saldo, p.status.status]
+  end
+end

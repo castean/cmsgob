@@ -7,9 +7,16 @@
     Pagos
   </li>
 
-  <span class="glyphicon glyphicon-download-alt pull-right" aria-hidden="true"> <%= link_to 'Excel', new_client_path %></span>
+  <span class="glyphicon glyphicon-download-alt pull-right" aria-hidden="true"> <%= link_to 'Excel', payments_path(format: 'xlsx') %></span>
 
 </ol>
+
+<%= search_form_for @q do |f| %>
+    <%= f.search_field :client_fullname_cont, placeholder: "Buscar Cliente" %>
+    <%#= f.search_field :tel_eq, placeholder: "Buscar Tel" %>
+    <%= f.submit "Buscar" %>
+<% end %>
+
 <table class="table table-hover table-condensed">
   <thead>
     <tr>
@@ -25,10 +32,10 @@
 
   <tbody>
     <% @payments.each do |payment| %>
-    <%if payment.status_id = 10%>
-      <tr class="success">
-    <%else%>
+    <%if payment.status_id == 11 %>
       <tr class="danger">
+    <%else%>
+      <tr class="success">
     <%end%>
         <td><%= payment.calendar.calendario %></td>
         <td><%= payment.client.fullname %></td>
@@ -53,7 +60,7 @@
     <% end %>
   </tbody>
 </table>
-
+<%= will_paginate @payments %>
 <br>
 
 <%#= link_to 'New Payment', new_payment_path %>
