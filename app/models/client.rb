@@ -4,7 +4,7 @@ class Client < ActiveRecord::Base
   belongs_to :product
   belongs_to :status
   validates :fullname, :direccion, :email, :fecha_inicio, :payment_type_id, :status_id, :sectorial_id, :ip_address, :product_id, presence: true
-  validates :tel, :cel, numericality: { only_integer: true }, presence: true
+  validates :tel, numericality: { only_integer: true }, presence: true
   before_create :grabar_ip
 
 
