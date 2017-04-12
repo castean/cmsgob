@@ -6,9 +6,11 @@ class Client < ActiveRecord::Base
   validates :fullname, :direccion, :email, :fecha_inicio, :payment_type_id, :status_id, :sectorial_id, :ip_address, :product_id, presence: true
   validates :tel, numericality: { only_integer: true }, presence: true
   before_create :grabar_ip
+  before_save :checar_role
 
-
-
+  def checar_role
+    self.role.upcase
+  end
   def grabar_ip
     ip = self.ip_address
     sectorial = self.sectorial_id
