@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.3.1'
 # Gemas Instaladas por el Ing. Antonio Castellanos Loya
   # Info en  https://github.com/twbs/bootstrap-sass
   gem 'bootstrap-sass', '3.3.7'
